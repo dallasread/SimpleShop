@@ -1,0 +1,17 @@
+.add_to_cart {
+	button {
+		.is_calculating {
+			display: none;
+		}
+		
+		&[disabled] {
+			.is_not_calculating {
+				display: none;
+			}
+	
+			.is_calculating {
+				display: inline-block;
+			}
+		}
+	}
+}

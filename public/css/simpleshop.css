@@ -1,0 +1,6 @@
+.add_to_cart button .is_calculating {
+  display: none; }
+.add_to_cart button[disabled] .is_not_calculating {
+  display: none; }
+.add_to_cart button[disabled] .is_calculating {
+  display: inline-block; }

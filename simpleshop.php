@@ -34,6 +34,7 @@ class SimpleShop {
   private function __construct() {
 		add_action( 'init', array($this, 'create_post_types') );
 		add_action( "admin_init", array( $this, "admin_enqueue_scripts") );
+		add_action( 'wp_enqueue_scripts', array($this, 'wp_enqueue_scripts') );
 		add_action( 'add_meta_boxes' , array($this, 'add_meta_boxes') );
 		add_action( 'save_post', array($this, 'save_product') );
 		
@@ -51,6 +52,15 @@ class SimpleShop {
 		wp_enqueue_script( array( "jquery", "wp-color-picker", "simpleshop_selectize", "simpleshop" ) );
 		
 		wp_register_style( "simpleshop", plugins_url("admin/css/simpleshop.min.css", __FILE__) );
+		wp_enqueue_style( array( "simpleshop" ) );
+	}
+	
+	public static function wp_enqueue_scripts() {
+		wp_register_script( "simpleshop", plugins_url("public/js/simpleshop.min.js", __FILE__) );
+		wp_enqueue_script( array( "jquery", "simpleshop" ) );
+		wp_localize_script( 'simpleshop', 'SimpleShopAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
+		
+		wp_register_style( "simpleshop", plugins_url("public/css/simpleshop.min.css", __FILE__) );
 		wp_enqueue_style( array( "simpleshop" ) );
 	}
 	
@@ -79,7 +89,8 @@ class SimpleShop {
 	}
 	
 	public static function add_to_cart_shortcode( $attrs ) {
-		require 'admin/php/products/shortcodes/add_to_cart.php';
+		$is_button = true;
+		require 'admin/php/products/shortcodes/product.php';
 	}
 	
 	public static function product_variants_shortcode( $attrs ) {
@@ -92,6 +103,10 @@ class SimpleShop {
 	
 	public static function add_to_cart() {
 		require 'admin/php/products/add_to_cart.php';
+	}
+	
+	public static function price_for_product( $attrs ) {
+		return require 'admin/php/products/price_for_product.php';
 	}
 }
 

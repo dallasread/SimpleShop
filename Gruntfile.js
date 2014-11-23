@@ -16,7 +16,7 @@ module.exports = function(grunt) {
 				},
 				files: {
 					"admin/js/<%= pkg.permalink %>.js": ["admin/coffeescript/*.coffee"],
-					//"public/js/<%= pkg.permalink %>.js": ["public/coffeescript/*.coffee"]
+					"public/js/<%= pkg.permalink %>.js": ["public/coffeescript/*.coffee"]
 				}
 	    }
 	  },
@@ -24,7 +24,7 @@ module.exports = function(grunt) {
 	    dist: {
 	      files: {
 					"admin/css/<%= pkg.permalink %>.css": ["admin/scss/main.scss"],
-					//"public/css/<%= pkg.permalink %>.css": ["public/scss/main.scss"],
+					"public/css/<%= pkg.permalink %>.css": ["public/scss/main.scss"],
 	      }
 	    }
 	  },
@@ -36,8 +36,8 @@ module.exports = function(grunt) {
 					bare: true
 				},
 				files: {
-					"admin/js/<%= pkg.permalink %>.min.js": ["admin/js/<%= pkg.permalink %>.js"], //"admin/js/vendor/*.js", 
-					//"public/js/script.min.js": ["public/js/vendor/*.js", "public/js/<%= pkg.permalink %>.js"]
+					"admin/js/<%= pkg.permalink %>.min.js": ["admin/js/<%= pkg.permalink %>.js"],
+					"public/js/<%= pkg.permalink %>.min.js": ["public/js/<%= pkg.permalink %>.js"]
 				}
       }
     },

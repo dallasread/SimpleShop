@@ -34,6 +34,8 @@
 				}
 			
 				$pricing[$key]["options"] = $options_array;
+				if ($pricing[$key]["price"] != "") { $pricing[$key]["price"] = number_format($pricing[$key]["price"], 2); }
+				if ($pricing[$key]["shipping"] != "") { $pricing[$key]["shipping"] = number_format($pricing[$key]["shipping"], 2); }
 			}
 		}
 		update_post_meta( $post_id, "pricing", json_encode($pricing) );
