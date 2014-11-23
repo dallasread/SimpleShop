@@ -1,0 +1,7 @@
+.git
+.gitignore
+ignoring.txt
+readme.txt
+simpleshop.php
+simpleshop.zip
+zipper

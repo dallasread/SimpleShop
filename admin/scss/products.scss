@@ -1,0 +1,39 @@
+.post-type-product {
+	.selectize-control {
+		position: static;
+	}
+	
+	.center {
+		text-align: center;
+	}
+	
+	.no_padding {
+		padding: 0px;
+	}
+	
+	.description {
+		font-weight: normal;
+		color: #aaa;
+	}
+	
+	.bigger {
+		font-size: 1.1em;
+		line-height: 2em;
+		display: block;
+	}
+	
+	table {
+		input {
+			max-width: 100%;
+		}
+		
+		td {
+			vertical-align: middle;
+			
+			.dashicons-trash {
+				font-size: 16px;
+				color: #aaa;
+			}
+		}
+	}
+}
