@@ -10,5 +10,5 @@
 
 <p>
 	<strong class="bigger">[product_variants id=<?php echo $post->ID; ?>]</strong>
-	Add a product's variants as an JSON string (ideal for using in an HTML data attribute).
+	Add a product's variants as an JSON string (ideal for injecting into a JS variable).
 </p>

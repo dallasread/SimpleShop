@@ -62,5 +62,13 @@ SimpleShop.events = ->
 			cart.find(".clean_total").text json.clean_total
 			tr.find(".price").text json.item_price
 			button.prop "disabled", false
+	
+	$(document).on "click", ".simpleshop_swatch", ->
+		colour = $(this).attr("data-colour")
+		id = $(this).attr("data-id")
+		$(".simpleshop_swatch.selected").removeClass "selected"
+		$(this).addClass "selected"
+		$("##{id}").val(colour).trigger "change"
+		false
 
 $(document).ready SimpleShop.events

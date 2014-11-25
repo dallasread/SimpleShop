@@ -17,11 +17,21 @@
 			
 				<div class="field">
 					<label for="<?php echo $id; ?>"><?php echo $value->attribute; ?></label>
-					<select name="<?php echo $value->permalink; ?>" id="<?php echo $id; ?>">
+					
+					<?php if (strpos($value->permalink, 'color') !== false || strpos($value->permalink, 'colour') !== false) { ?>
 						<?php foreach ($value->options as $option) { ?>
-							<option value="<?php echo $option; ?>" <?php if (isset($attrs[$value->permalink]) && $attrs[$value->permalink] == $option) { echo "selected='selected'"; } ?>><?php echo $option; ?></option>
+							<?php echo SimpleShop::build_swatch( $option, $attrs[$value->permalink], $id ); ?>
 						<?php } ?>
-					</select>
+						
+						<input type="hidden" name="<?php echo $value->permalink; ?>" id="<?php echo $id; ?>" value="<?php echo $attrs[$value->permalink]; ?>">
+						<div class="simpleshop_clear_swatches"></div>
+					<?php } else { ?>
+						<select name="<?php echo $value->permalink; ?>" id="<?php echo $id; ?>">
+							<?php foreach ($value->options as $option) { ?>
+								<option value="<?php echo $option; ?>" <?php if (isset($attrs[$value->permalink]) && $attrs[$value->permalink] == $option) { echo "selected='selected'"; } ?>><?php echo $option; ?></option>
+							<?php } ?>
+						</select>
+					<?php } ?>
 				</div>
 			<?php } ?>
 			

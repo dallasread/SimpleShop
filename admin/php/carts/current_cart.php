@@ -50,20 +50,23 @@
 			
 			$cart->items[$key]->price = $pricing["price"];
 			$cart->items[$key]->shipping = $pricing["shipping"];
-			$cart->subtotal += $pricing["price"];
-			$cart->shipping += $pricing["shipping"];
+			$cart->subtotal += str_replace(",", "", $pricing["price"]);
+			$cart->shipping += str_replace(",", "", $pricing["shipping"]);
 		}
 
 		if ($cart->local) {
 			$cart->shipping = 0;
-		} else {
-			if ($settings->max_shipping != "" && $cart->shipping > (integer) $settings->max_shipping) { $cart->shipping = $settings->max_shipping; }
+		} else if ($settings->max_shipping != "" && $cart->shipping > (integer) $settings->max_shipping) {
+			$cart->shipping = str_replace(",", "", $settings->max_shipping);
 		}
 		
 		$cart->shipping = number_format($cart->shipping, 2);
 		$cart->subtotal = number_format($cart->subtotal, 2);
 		$cart->tax = number_format($cart->tax, 2);
-		$cart->total = number_format($cart->subtotal + $cart->tax + $cart->shipping, 2);
+		$subtotal = (integer) str_replace(",", "", $cart->subtotal);
+		$tax = (integer) str_replace(",", "", $cart->tax);
+		$shipping = (integer) str_replace(",", "", $cart->shipping);
+		$cart->total = number_format($subtotal + $tax + $shipping, 2);
 		$cart->clean_total = str_replace(".00", "", $cart->total);
 	}
 	

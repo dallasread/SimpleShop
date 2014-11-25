@@ -21,7 +21,7 @@
 		'show_ui' => true,
 		'show_in_menu' => true,
 		'query_var' => true,
-		'rewrite' => array( 'slug' => 'product' ),
+		'rewrite' => array( 'slug' => 'products' ),
 		'capability_type' => 'post',
 		'capabilities' => array(
 			'read_post' => 'unmanageable_simpleshop',

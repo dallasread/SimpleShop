@@ -89,11 +89,16 @@ class SimpleShop {
 	}
 	
 	public static function admin_menu() {
-		add_options_page('SimpleShop', 'SimpleShop', 'manage_simpleshop', 'simpleshop', array( 'SimpleShop', 'settings_page' ));
+		add_options_page('SimpleShop', 'SimpleShop', 'manage_simpleshop', 'simpleshop_settings', array( 'SimpleShop', 'settings_page' ));
+		add_menu_page( 'Orders', 'Orders', 'manage_simpleshop', 'simpleshop_orders', array( 'SimpleShop', 'orders' ), '', 35 );
 	}
 	
 	public static function settings_page() {
 		require 'admin/php/settings/index.php';
+	}
+	
+	public static function carts() {
+		return array(1, 2);
 	}
 	
 	public static function add_roles() {
@@ -114,6 +119,10 @@ class SimpleShop {
 	
 	public static function update_db() {		
 		return require 'admin/php/carts/create_tables.php';
+	}
+	
+	public static function orders() {
+		return require 'admin/php/orders/index.php';
 	}
 	
 	public static function pricing_meta_box( $post ) {
@@ -174,7 +183,7 @@ class SimpleShop {
 	}
 	
 	public static function add_to_cart() {
-		return require 'admin/php/products/add_to_cart.php';
+		return require 'public/php/products/add_to_cart.php';
 	}
 	
 	public static function price_for_product( $attrs ) {
@@ -191,15 +200,19 @@ class SimpleShop {
 	}
 	
 	public static function remove_from_cart() {
-		return require 'admin/php/carts/remove_from_cart.php';
+		return require 'public/php/carts/remove_from_cart.php';
 	}
 	
 	public static function pickup_locally() {
-		return require 'admin/php/carts/pickup_locally.php';
+		return require 'public/php/carts/pickup_locally.php';
 	}
 	
 	public static function change_quantity() {
-		return require 'admin/php/carts/change_quantity.php';
+		return require 'public/php/carts/change_quantity.php';
+	}
+	
+	public static function build_swatch( $colours, $selected = false, $id = false ) {
+		require 'public/php/products/build_swatch.php';
 	}
 }
 

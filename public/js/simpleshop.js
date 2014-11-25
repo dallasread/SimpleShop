@@ -49,7 +49,7 @@
         return button.prop("disabled", false);
       });
     });
-    return cart.on("change", ".quantity", function() {
+    cart.on("change", ".quantity", function() {
       var button, tr;
       tr = $(this).closest("tr");
       button = cart.find("button[type='submit']");
@@ -69,6 +69,15 @@
         tr.find(".price").text(json.item_price);
         return button.prop("disabled", false);
       });
+    });
+    return $(document).on("click", ".simpleshop_swatch", function() {
+      var colour, id;
+      colour = $(this).attr("data-colour");
+      id = $(this).attr("data-id");
+      $(".simpleshop_swatch.selected").removeClass("selected");
+      $(this).addClass("selected");
+      $("#" + id).val(colour).trigger("change");
+      return false;
     });
   };
 

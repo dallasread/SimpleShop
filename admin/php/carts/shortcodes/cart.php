@@ -21,7 +21,14 @@
 							<?php echo $item->product; ?>
 							<ul>
 								<?php foreach ($item->variants as $key => $value) { ?>
-									<li><?php echo ucfirst($key); ?>: <strong><?php echo ucfirst($value); ?></strong></li>
+									<li>
+										<?php echo ucfirst($key); ?>: 
+										<?php if (strpos($key, 'color') !== false || strpos($key, 'colour') !== false) { ?>
+											<?php echo SimpleShop::build_swatch( $value ); ?>
+										<?php } else { ?>
+											<strong><?php echo ucfirst($value); ?></strong>
+										<?php } ?>
+									</li>
 								<?php } ?>
 							</ul>
 						</td>
