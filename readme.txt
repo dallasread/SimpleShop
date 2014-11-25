@@ -1,29 +1,30 @@
 === SimpleShop ===
 Version: 1.0.0
-URI: http://simpleshop.com
+URI: http://WPSimpleShop.com
 Contributors: dallas22ca
 Author: Dallas Read
 Author URI: http://www.DallasRead.com
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NX9NZCDNRD3CC
-Tags: restrict, permissions, restrict page
+Tags: ecommerce, sell, sale, coupon, shop, store
 Requires at least: 3.6
-Tested up to: 4.0
+Tested up to: 4.0.1
 Stable tag: trunk
 License: MIT
 
-SimpleShop is a lightweight e-commerce plugin perfect for small businesses.
+SimpleShop is a lightweight e-commerce plugin that integrates seamlessly with Stripe.
 
 == Description ==
 
-**What can I do with SimpleShop?**
+**Do I have to use Stripe with SimpleShop?**
 
-SimpleShop allows you to restrict access to specific user roles on a page-by-page basis. For unauthorized users, you can set where the page is redirected.
+Yes, SimpleShop was designed around Stripe's API. Of course, we may extend this functionality in the future.
 
 **How do I use SimpleShop?**
 
-* Go to the Edit page for the Page or Post you wish to protect (works for all "public" page/post types).
-* On the right sidebar, you'll see the SimpleShop box.
-* Check off which roles are allowed to see the page and save. If you want to redirect them to a particular page (eg. login), enter the URL in the Redirect URL field, otherwise it will simply redirect to the home page.
+* Visit the Settings > SimpleShop page and fill in the information, including your Stripe API Keys.
+* We strongly recommend installing an SSL certificate.
+* Visit the Products page (in the left sidebar) and start adding products and variations.
+* Create a page called Cart and place the [cart] shortcode in the page content.
 
 == Installation ==
 
@@ -33,16 +34,13 @@ SimpleShop allows you to restrict access to specific user roles on a page-by-pag
 == Frequently Asked Questions ==
 
 = How do I use SimpleShop? =
-* Go to the Edit page for the Page or Post you wish to protect (works for all "public" page/post types).
-* On the right sidebar, you'll see the SimpleShop meta box.
-* Check off which roles are allowed to see the page and save. If you want to redirect them to a particular page (eg. login), enter the URL in the Redirect URL field, otherwise it will simply redirect to the home page.
-
-= What if I don't see the SimpleShop meta box on the Edit page? =
-* Make sure the plugin is Activated.
-* In the top right corner of the page, click "Screen Options." Ensure "SimpleShop" is checked.
+* Visit the Settings > SimpleShop page and fill in the information, including your Stripe API Keys.
+* We strongly recommend installing an SSL certificate.
+* Visit the Products page (in the left sidebar) and start adding products and variations.
+* Create a page called Cart and place the [cart] shortcode in the page content.
 
 = What is SimpleShop? =
-* SimpleShop allows you to restrict access to specific user roles on a page-by-page basis.
+SimpleShop is a lightweight e-commerce plugin that integrates seamlessly with Stripe.
 
 == Screenshots ==
 

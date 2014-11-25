@@ -2,14 +2,14 @@
 /*
 Plugin Name: SimpleShop
 Plugin URI: http://WPSimpleShop.com
-Description: SimpleShop is a lightweight e-commerce plugin perfect for small businesses.
+Description: SimpleShop is a lightweight e-commerce plugin that integrates seamlessly with Stripe.
 Version: 1.0.0
 Contributors: dallas22ca
 Author: Dallas Read
 Author URI: http://www.DallasRead.com
 Text Domain: simpleshop
 Requires at least: 3.6
-Tested up to: 4.0
+Tested up to: 4.0.1
 Stable tag: trunk
 License: MIT
 
@@ -22,7 +22,7 @@ error_reporting(-1);
 
 class SimpleShop {
   public static $simpleshop_instance;
-	const version = '0.0.1';
+	const version = '1.0.0';
 	const debug = true;
 
   public static function init() {
