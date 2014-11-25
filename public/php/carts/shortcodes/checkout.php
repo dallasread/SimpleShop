@@ -27,6 +27,11 @@
 	</div>
 
 	<hr>
+	
+	<div class="field">
+		<label for="full_address">Full Address</label>
+		<input type="text" id="full_address" name="full_address" value="<?php echo $cart->full_address; ?>" autocomplete="off">
+	</div>
 
 	<div class="field">
 		<label for="address">Address</label>
@@ -102,3 +107,4 @@
 </form>
 
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=true"></script>

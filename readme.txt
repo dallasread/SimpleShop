@@ -11,7 +11,7 @@ Tested up to: 4.0
 Stable tag: trunk
 License: MIT
 
-SimpleShop is a lightweight e-commerce plugin - perfect for small businesses.
+SimpleShop is a lightweight e-commerce plugin perfect for small businesses.
 
 == Description ==
 

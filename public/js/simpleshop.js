@@ -2,6 +2,7 @@
   this.SimpleShop || (this.SimpleShop = {});
 
   SimpleShop.checkout = function() {
+    SimpleShop.geocode();
     if ($(".checkout").length) {
       Stripe.setPublishableKey(SimpleShopAjax.stripe_publishable);
       $(document).on("submit", ".checkout", function() {
@@ -27,6 +28,45 @@
         $(".no_card_fields").hide();
         $(".card_fields").show();
         return false;
+      });
+    }
+  };
+
+  SimpleShop.geocode = function() {
+    var autocomplete, componentForm, full_address;
+    full_address = $("#full_address");
+    if (full_address.length) {
+      componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+      };
+      autocomplete = new google.maps.places.Autocomplete(full_address[0], {
+        types: ['geocode']
+      });
+      return google.maps.event.addListener(autocomplete, 'place_changed', function() {
+        var addressType, components, i, place, val;
+        place = autocomplete.getPlace();
+        components = {};
+        i = 0;
+        while (i < place.address_components.length) {
+          addressType = place.address_components[i].types[0];
+          if (componentForm[addressType]) {
+            val = place.address_components[i][componentForm[addressType]];
+            components[addressType] = val;
+          }
+          i++;
+        }
+        if (components !== {}) {
+          $("#address").val("" + components.street_number + " " + components.route);
+          $("#city").val(components.locality);
+          $("#province").val(components.administrative_area_level_1);
+          $("#postal_code").val(components.postal_code);
+          return $("#country").val(components.country);
+        }
       });
     }
   };

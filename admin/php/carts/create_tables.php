@@ -17,6 +17,7 @@
 			status VARCHAR(30) DEFAULT 'pending',
 			customer_name VARCHAR(100),
 			customer_email VARCHAR(100),
+			full_address VARCHAR(200),
 			address VARCHAR(100),
 			city VARCHAR(100),
 			province VARCHAR(100),

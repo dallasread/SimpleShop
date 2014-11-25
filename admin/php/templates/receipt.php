@@ -1,12 +1,29 @@
 <?php $settings = json_decode( get_option( "simpleshop_settings" ) ); ob_start(); ?>
+<style type="text/css" media="screen">
+	table {
+		border-collapse: collapse;
+	}
+
+	td, th {
+		border: 1px solid #333;
+		padding: 7px;
+	}
+	
+	td ul {
+		margin: 7px 0 0 -25px;
+	}
+	
+	.simpleshop_swatch {
+		display: inline-block;
+	}
+</style>
 <div class="cart">
-	<table>
+	<table style="width: 100%; ">
 		<thead>
 			<tr>
 				<th>Quantity</th>
 				<th>Description</th>
 				<th>Amount</th>
-				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,44 +46,45 @@
 								<?php } ?>
 							</ul>
 						</td>
-						<td class="price"><?php echo $item->price; ?></td>
-						<td><a href="<?php echo admin_url('admin-ajax.php'); ?>?action=remove_from_cart&id=<?php echo $item->id; ?>">x</a></td>
+						<td style="text-align: right; " class="price"><?php echo $item->price; ?></td>
 					</tr>
 				<?php	} ?>
 			<?php } ?>
-		</tbody>
-	</table>
-
-	<table>
-		<tr>
-			<td>Special Instructions</td>
-			<td class="subtotal"><?php echo $cart->instructions; ?></td>
-		</tr>
-		<tr>
-			<td>Subtotal</td>
-			<td class="subtotal"><?php echo $cart->subtotal; ?></td>
-		</tr>
-		<?php if ($settings->local) { ?>
+		
+		<?php if ($cart->instructions != "") { ?>
 			<tr>
-				<td>
+				<td colspan="3">
+					<strong>Special Instructions</strong><br>
+					<?php echo $cart->instructions; ?>
+				</td>
+			</tr>
+		<?php } ?>
+
+		<tr>
+			<td colspan="2">Subtotal</td>
+			<td style="text-align: right; " class="subtotal"><?php echo $cart->subtotal; ?></td>
+		</tr>
+		<?php if ($cart->local) { ?>
+			<tr>
+				<td colspan="2">
 					<label for="local">Pick Up Locally</label>
 				</td>
-				<td>
-					<input type="checkbox" id="local" <?php if ($cart->local) { echo "checked='checked'"; }?>>
+				<td style="text-align: right; ">
+					Yes
 				</td>
 			</tr>
 		<?php } ?>
 		<tr>
-			<td>Shipping</td>
-			<td class="shipping"><?php echo $cart->shipping; ?></td>
+			<td colspan="2">Shipping</td>
+			<td style="text-align: right; " class="shipping"><?php echo $cart->shipping; ?></td>
 		</tr>
 		<tr>
-			<td>Tax</td>
-			<td class="tax"><?php echo $cart->tax; ?></td>
+			<td colspan="2">Tax</td>
+			<td style="text-align: right; " class="tax"><?php echo $cart->tax; ?></td>
 		</tr>
 		<tr>
-			<td>Total</td>
-			<td class="total"><?php echo $cart->total; ?></td>
+			<td colspan="2">Total</td>
+			<td style="text-align: right; " class="total"><?php echo $cart->total; ?></td>
 		</tr>
 	</table>
 </div>

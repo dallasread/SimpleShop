@@ -10,20 +10,19 @@
 			SIMPLESHOP_CARTS,
 			$_COOKIE['simpleshop_cart']
 		));
-	}
-	
-	
-	if (!$cart) {
-		$cart_attrs = array(
-	    "token" => $_COOKIE['simpleshop_cart'],
-			"status" => "pending",
-			"local" => 0,
-	    "created_at" => $now,
-	    "updated_at" => $now
-	  );
-		if ( $wpdb->insert( SIMPLESHOP_CARTS, $cart_attrs ) ) {
-			$cart = (object) $cart_attrs;
-			$cart->id = $wpdb->insert_id;
+		
+		if (!$cart) {
+			$cart_attrs = array(
+		    "token" => $_COOKIE['simpleshop_cart'],
+				"status" => "pending",
+				"local" => 0,
+		    "created_at" => $now,
+		    "updated_at" => $now
+		  );
+			if ( $wpdb->insert( SIMPLESHOP_CARTS, $cart_attrs ) ) {
+				$cart = (object) $cart_attrs;
+				$cart->id = $wpdb->insert_id;
+			}
 		}
 	}
 	

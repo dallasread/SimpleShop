@@ -1,9 +1,8 @@
 <?php
 /*
-
 Plugin Name: SimpleShop
-Plugin URI: http://SimpleShop.guru
-Description: SimpleShop is a lightweight e-commerce plugin - perfect for small businesses.
+Plugin URI: http://WPSimpleShop.com
+Description: SimpleShop is a lightweight e-commerce plugin perfect for small businesses.
 Version: 1.0.0
 Contributors: dallas22ca
 Author: Dallas Read
