@@ -1,3 +1,4 @@
+<?php $settings = json_decode( get_option( "simpleshop_settings" ) ); ob_start(); ?>
 <div class="cart">
 	<table>
 		<thead>
@@ -9,14 +10,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php if (!$cart || count($cart->items) == 0) { ?>
-				<tr>
-					<td colspan="4">Your cart is empty.</td>
-				</tr>
-			<?php } else { ?>
+			<?php if (!empty($cart->items)) { ?>
 				<?php foreach ($cart->items as $item) { ?>
 					<tr data-item-id="<?php echo $item->id; ?>">
-						<td><input type="text" class="quantity" value="<?php echo $item->quantity; ?>"></td>
+						<td><?php echo $item->quantity; ?></td>
 						<td>
 							<?php echo $item->product; ?>
 							<ul>
@@ -41,6 +38,10 @@
 	</table>
 
 	<table>
+		<tr>
+			<td>Special Instructions</td>
+			<td class="subtotal"><?php echo $cart->instructions; ?></td>
+		</tr>
 		<tr>
 			<td>Subtotal</td>
 			<td class="subtotal"><?php echo $cart->subtotal; ?></td>
@@ -68,11 +69,5 @@
 			<td class="total"><?php echo $cart->total; ?></td>
 		</tr>
 	</table>
-
-	<form action="<?php echo get_permalink($settings->cart_page_id); ?>" method="post">
-		<input type="hidden" name="checkout" value="true">
-		<button type="submit">
-			Checkout ($<span class="clean_total"><?php echo $cart->clean_total; ?></span>)
-		</button>
-	</form>
 </div>
+<?php $return = ob_get_contents(); ob_end_clean(); return $return; ?>

@@ -16,6 +16,7 @@
 	if (!$cart) {
 		$cart_attrs = array(
 	    "token" => $_COOKIE['simpleshop_cart'],
+			"status" => "pending",
 			"local" => 0,
 	    "created_at" => $now,
 	    "updated_at" => $now
@@ -56,7 +57,7 @@
 
 		if ($cart->local) {
 			$cart->shipping = 0;
-		} else if ($settings->max_shipping != "" && $cart->shipping > (integer) $settings->max_shipping) {
+		} else if (isset($settings->max_shipping) && $settings->max_shipping != "" && $cart->shipping > (integer) $settings->max_shipping) {
 			$cart->shipping = str_replace(",", "", $settings->max_shipping);
 		}
 		

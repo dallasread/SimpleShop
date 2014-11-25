@@ -5,14 +5,17 @@
 		$_POST["local"] = isset($_POST["local"]);
 		$_POST["use_js"] = isset($_POST["use_js"]);
 		update_option( "simpleshop_settings", json_encode($_POST) );
+		
 		$saved = true;
 	}
 
 	$settings = json_decode( get_option( "simpleshop_settings", json_encode( array(
 		"local" => 0,
 		"use_js" => 0,
-		"max_shipping" => 50,
+		"max_shipping" => "",
+		"email" => "",
 		"cart_page_id" => "",
+		"currency" => "cad",
 		"stripe_secret" => "",
 		"stripe_publishable" => ""
 	))));
@@ -25,7 +28,7 @@
     ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
     isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
     $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) { ?>
-		<p style="color: maroon; "><strong>We strongly recommend that you install an SSL certificate before accepting any payments. Contact your hosting provider for more information.</strong></p>
+		<p style="color: maroon; "><strong>To maintain your PCI Compliance, We strongly recommend that you install an SSL certificate before accepting any payments. Contact your hosting provider for more information.</strong></p>
 	<?php } ?>
 	<hr>
 	
@@ -35,7 +38,7 @@
 	  </div>
 	<?php } ?>
 	
-	<form method="post" action="options-general.php?page=simpleshop" novalidate="novalidate">
+	<form method="post" action="options-general.php?page=simpleshop_settings">
 		<table class="form-table">
 			<tbody>
 				<tr>
@@ -66,6 +69,24 @@
 							<option value="" <?php if ($settings->cart_page_id == "") { echo "selected='selected'"; } ?>>None</option>
 							<?php foreach (get_pages() as $page) { ?>
 								<option value="<?php echo $page->ID; ?>" <?php if ((integer) $settings->cart_page_id == $page->ID) { echo "selected='selected'"; } ?>><?php echo $page->post_title; ?></option>
+							<?php } ?>
+						</select>
+						<p class="description">Which page is the [cart] shortcode on?</p>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="email">Email Orders</label></th>
+					<td>
+						<input name="email" type="text" id="email" value="<?php echo $settings->email; ?>" class="regular-text">
+						<p class="description">Which address should we email receipts to?</p>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="currency">Currency</label></th>
+					<td>
+						<select name="currency" id="currency">
+							<?php foreach (array('cad', 'usd') as $currency) { ?>
+								<option value="<?php echo $currency; ?>" <?php if ($settings->currency == $currency) { echo "selected='selected'"; } ?>><?php echo strtoupper($currency); ?></option>
 							<?php } ?>
 						</select>
 						<p class="description">Which page is the [cart] shortcode on?</p>

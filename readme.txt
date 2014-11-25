@@ -11,7 +11,7 @@ Tested up to: 4.0
 Stable tag: trunk
 License: MIT
 
-SimpleShop allows you to restrict access to specific user roles on a page-by-page basis.
+SimpleShop is a lightweight e-commerce plugin - perfect for small businesses.
 
 == Description ==
 

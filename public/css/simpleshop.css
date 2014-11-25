@@ -1,8 +1,8 @@
-.add_to_cart button .is_calculating {
+.add_to_cart button[type="submit"] .is_calculating, .cart button[type="submit"] .is_calculating, .checkout button[type="submit"] .is_calculating {
   display: none; }
-.add_to_cart button[disabled] .is_not_calculating {
+.add_to_cart button[type="submit"][disabled] .is_not_calculating, .cart button[type="submit"][disabled] .is_not_calculating, .checkout button[type="submit"][disabled] .is_not_calculating {
   display: none; }
-.add_to_cart button[disabled] .is_calculating {
+.add_to_cart button[type="submit"][disabled] .is_calculating, .cart button[type="submit"][disabled] .is_calculating, .checkout button[type="submit"][disabled] .is_calculating {
   display: inline-block; }
 
 .simpleshop_clear_swatches {

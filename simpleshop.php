@@ -3,7 +3,7 @@
 
 Plugin Name: SimpleShop
 Plugin URI: http://SimpleShop.guru
-Description: SimpleShop is a suite of high-converting tools that help you to engage your visitors, personalize customer connections, and boost your profits.
+Description: SimpleShop is a lightweight e-commerce plugin - perfect for small businesses.
 Version: 1.0.0
 Contributors: dallas22ca
 Author: Dallas Read
@@ -17,8 +17,8 @@ License: MIT
 Copyright (c) 2014 Dallas Read.
 */
 
-ini_set('display_errors',1);
-ini_set('display_startup_errors',1);
+ini_set("display_errors",1);
+ini_set("display_startup_errors",1);
 error_reporting(-1);
 
 class SimpleShop {
@@ -80,9 +80,14 @@ class SimpleShop {
 	}
 	
 	public static function wp_enqueue_scripts() {
+		$settings = json_decode( get_option( 'simpleshop_settings' ) );
+				
 		wp_register_script( "simpleshop", plugins_url("public/js/simpleshop.min.js", __FILE__) );
 		wp_enqueue_script( array( "jquery", "simpleshop" ) );
-		wp_localize_script( 'simpleshop', 'SimpleShopAjax', array( 'ajaxurl' => admin_url( 'admin-ajax.php' )));
+		wp_localize_script( 'simpleshop', 'SimpleShopAjax', array(
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'stripe_publishable' => $settings->stripe_publishable
+		));
 		
 		wp_register_style( "simpleshop", plugins_url("public/css/simpleshop.min.css", __FILE__) );
 		wp_enqueue_style( array( "simpleshop" ) );
@@ -142,9 +147,14 @@ class SimpleShop {
 	}
 	
 	public static function init_plugin() {
-		if (!isset($_COOKIE['simpleshop_cart'])) {
-			$token = md5(uniqid(mt_rand(), true));
-			setcookie( 'simpleshop_cart', $token, time() + 3600, COOKIEPATH, COOKIE_DOMAIN );
+		if (!is_admin()) {
+			$cart = SimpleShop::current_cart();
+
+			if (!isset($_COOKIE['simpleshop_cart']) || ($cart && $cart->status != "pending")) {
+				$token = md5(uniqid(mt_rand(), true));
+				$_COOKIE['simpleshop_cart'] = $token;
+				setcookie( 'simpleshop_cart', $token, time() + 3600, COOKIEPATH, COOKIE_DOMAIN );
+			}
 		}
 		
 		return require 'admin/php/products/create_post_type.php';
@@ -160,18 +170,34 @@ class SimpleShop {
 	
 	public static function add_to_cart_shortcode( $attrs ) {
 		$is_button = true;
-		require 'admin/php/products/shortcodes/product.php';
+		require 'public/php/products/shortcodes/product.php';
 	}
 	
 	public static function cart_shortcode() {
 		$cart = SimpleShop::current_cart();
 		$settings = json_decode( get_option( "simpleshop_settings" ) );
 
-		if (isset($_POST["checkout"])) {
-			require 'admin/php/carts/shortcodes/checkout.php';
+		if ($cart->status != "pending") {
+			echo "Your order <strong>" . substr(strtoupper($cart->token), -7) . "</strong> is processing.";
 		} else {
-			require 'admin/php/carts/shortcodes/cart.php';
+			if (isset($_REQUEST["checkout"]) && isset($_REQUEST["complete"])) {
+				$place_order = SimpleShop::place_order();
+			
+				if (empty($place_order["errors"])) {
+					require 'public/php/carts/shortcodes/complete.php';				
+				} else {
+					require 'public/php/carts/shortcodes/checkout.php';
+				}
+			} else if (isset($_REQUEST["checkout"])) {
+				require 'public/php/carts/shortcodes/checkout.php';
+			} else {
+				require 'public/php/carts/shortcodes/cart.php';
+			}
 		}
+	}
+	
+	public static function place_order() {
+		return require 'public/php/carts/place_order.php';
 	}
 	
 	public static function product_variants_shortcode( $attrs ) {
@@ -179,11 +205,11 @@ class SimpleShop {
 	}
 	
 	public static function product_shortcode( $attrs ) {
-		require 'admin/php/products/shortcodes/product.php';
+		require 'public/php/products/shortcodes/product.php';
 	}
 	
 	public static function add_to_cart() {
-		return require 'public/php/products/add_to_cart.php';
+		return require 'public/php/carts/add_to_cart.php';
 	}
 	
 	public static function price_for_product( $attrs ) {
@@ -211,8 +237,12 @@ class SimpleShop {
 		return require 'public/php/carts/change_quantity.php';
 	}
 	
-	public static function build_swatch( $colours, $selected = false, $id = false ) {
+	public static function build_swatch( $colours, $selected = false, $id = false, $size = 32 ) {
 		require 'public/php/products/build_swatch.php';
+	}
+	
+	public static function receipt( $cart ) {
+		return require 'admin/php/templates/receipt.php';
 	}
 }
 

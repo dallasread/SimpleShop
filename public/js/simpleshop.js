@@ -1,6 +1,40 @@
 (function() {
   this.SimpleShop || (this.SimpleShop = {});
 
+  SimpleShop.checkout = function() {
+    if ($(".checkout").length) {
+      Stripe.setPublishableKey(SimpleShopAjax.stripe_publishable);
+      $(document).on("submit", ".checkout", function() {
+        var form;
+        form = $(this);
+        form.find('button').prop('disabled', true);
+        if (!$("#card_token_is_set").length) {
+          Stripe.card.createToken(form, function(status, response) {
+            if (response.error) {
+              alert(response.error.message);
+              return form.find('button').prop('disabled', false);
+            } else {
+              form.append($('<input type="hidden" name="card_token">').val(response.id));
+              form.append($('<input type="hidden" name="last_four">').val(response.card.last4));
+              return form.get(0).submit();
+            }
+          });
+          return false;
+        }
+      });
+      return $(".checkout").on("click", ".change_card", function() {
+        $("#card_token_is_set").remove();
+        $(".no_card_fields").hide();
+        $(".card_fields").show();
+        return false;
+      });
+    }
+  };
+
+  $(document).ready(SimpleShop.checkout);
+
+  this.SimpleShop || (this.SimpleShop = {});
+
   SimpleShop.serializeObject = function(form) {
     var obj;
     obj = {};

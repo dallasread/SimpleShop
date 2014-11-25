@@ -2,33 +2,36 @@
 	if (is_object($attrs)) { $attrs = (array) $attrs; }
 	$id = is_array($attrs) ? $attrs["id"] : $attrs;
 	if (is_array($attrs)) { unset( $attrs["id"] ); }
-	$pricing = json_decode( get_post_meta( $id, "pricing", true ), true );
+	$pricing = get_post_meta( $id, "pricing", true );
+	$pricing = !empty($pricing) ? json_decode( $pricing, true ) : array();
 	
-	foreach ($pricing as $tier) {
-		$attributes_to_check = array();
+	if (is_array($pricing)) {
+		foreach ($pricing as $tier) {
+			$attributes_to_check = array();
 		
-		foreach ($tier["options"] as $option) {
-			if (array_key_exists($option["attribute"], $attributes_to_check)) {
-				array_push($attributes_to_check[$option["attribute"]]["options"], $option["value"]);
-			} else {
-				$attributes_to_check[$option["attribute"]]["options"] = array( $option["value"] );
-				$attributes_to_check[$option["attribute"]]["found"] = false;
+			foreach ($tier["options"] as $option) {
+				if (array_key_exists($option["attribute"], $attributes_to_check)) {
+					array_push($attributes_to_check[$option["attribute"]]["options"], $option["value"]);
+				} else {
+					$attributes_to_check[$option["attribute"]]["options"] = array( $option["value"] );
+					$attributes_to_check[$option["attribute"]]["found"] = false;
+				}
 			}
-		}
 		
-		foreach($attributes_to_check as $key => $value) {
-			if (array_key_exists($key, $attrs) && in_array($attrs[$key], $value["options"])) {
-				unset( $attributes_to_check[$key] );
+			foreach($attributes_to_check as $key => $value) {
+				if (array_key_exists($key, $attrs) && in_array($attrs[$key], $value["options"])) {
+					unset( $attributes_to_check[$key] );
+				}
 			}
-		}
 		
-		if (empty($attributes_to_check)) {
-			if ($tier["price"] != "" && !isset($price_per_unit)) {
-				$price_per_unit = $tier["price"];
-			}
+			if (empty($attributes_to_check)) {
+				if ($tier["price"] != "" && !isset($price_per_unit)) {
+					$price_per_unit = $tier["price"];
+				}
 			
-			if ($tier["shipping"] != "" && !isset($shipping_per_unit)) {
-				$shipping_per_unit = $tier["shipping"];
+				if ($tier["shipping"] != "" && !isset($shipping_per_unit)) {
+					$shipping_per_unit = $tier["shipping"];
+				}
 			}
 		}
 	}

@@ -1,7 +1,7 @@
 <?php
 	if (isset($_POST["price"])) {
-		update_post_meta( $post_id, "price", number_format(esc_attr($_POST["price"]), 2) );
-		update_post_meta( $post_id, "shipping", number_format(esc_attr($_POST["shipping"]), 2) );
+		if ($_POST["price"] != "") { update_post_meta( $post_id, "price", number_format(esc_attr($_POST["price"]), 2) ); }
+		if ($_POST["shipping"] != "") { update_post_meta( $post_id, "shipping", number_format(esc_attr($_POST["shipping"]), 2) ); }
 		update_post_meta( $post_id, "local", isset($_POST["local"]) );
 	}
 	

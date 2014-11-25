@@ -1,5 +1,5 @@
-.add_to_cart {
-	button {
+.add_to_cart, .cart, .checkout {
+	button[type="submit"] {
 		.is_calculating {
 			display: none;
 		}
@@ -40,19 +40,7 @@
 	padding: 1px;
 	border: 2px solid transparent;
 	
-	&.simpleshop_swatch_count_1 {
-		.inner_swatch {
-			width: 32px;
-			height: 32px;
-		}
-	}
-	
 	&.simpleshop_swatch_count_2 {
-		.outer_swatch {
-			width: 32px;
-			height: 32px;
-		}
-		
 		.inner_swatch {
 			width: 0;
 			height: 0;
