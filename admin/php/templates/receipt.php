@@ -70,4 +70,4 @@
 		</tr>
 	</table>
 </div>
-<?php $return = ob_get_contents(); ob_end_clean(); return $return; ?>
+<?php $return = ob_get_contents(); ob_end_clean(); return $return; ?> 
