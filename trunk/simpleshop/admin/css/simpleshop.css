@@ -1,0 +1,25 @@
+.post-type-product .selectize-control {
+  position: static; }
+.post-type-product .center {
+  text-align: center; }
+.post-type-product .no_padding {
+  padding: 0px; }
+.post-type-product .description {
+  font-weight: normal;
+  color: #aaa; }
+.post-type-product .bigger {
+  font-size: 1.1em;
+  line-height: 2em;
+  display: block; }
+.post-type-product table input {
+  max-width: 100%; }
+.post-type-product table td {
+  vertical-align: middle; }
+  .post-type-product table td .dashicons-trash {
+    font-size: 16px;
+    color: #aaa; }
+
+.post-type-cart .inline {
+  display: none !important; }
+.post-type-cart .add-new-h2 {
+  display: none !important; }

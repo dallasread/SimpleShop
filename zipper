@@ -9,7 +9,6 @@ ignored = [
   "*assets*",
   "*branches*",
   "*coffeescript*", 
-  "*php/includes*", 
   "*node_modules*", 
   "*scss*", 
   "*tags*",
