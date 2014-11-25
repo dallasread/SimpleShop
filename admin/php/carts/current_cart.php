@@ -64,6 +64,7 @@
 		$cart->subtotal = number_format($cart->subtotal, 2);
 		$cart->tax = number_format($cart->tax, 2);
 		$cart->total = number_format($cart->subtotal + $cart->tax + $cart->shipping, 2);
+		$cart->clean_total = str_replace(".00", "", $cart->total);
 	}
 	
 	return isset($cart) ? $cart : false;

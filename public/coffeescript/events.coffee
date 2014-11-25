@@ -41,6 +41,7 @@ SimpleShop.events = ->
 			cart.find(".shipping").text json.shipping
 			cart.find(".tax").text json.tax
 			cart.find(".total").text json.total
+			cart.find(".clean_total").text json.clean_total
 			button.prop "disabled", false
 	
 	cart.on "change", ".quantity", ->
@@ -58,6 +59,7 @@ SimpleShop.events = ->
 			cart.find(".shipping").text json.shipping
 			cart.find(".tax").text json.tax
 			cart.find(".total").text json.total
+			cart.find(".clean_total").text json.clean_total
 			tr.find(".price").text json.item_price
 			button.prop "disabled", false
 

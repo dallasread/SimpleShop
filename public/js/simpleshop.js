@@ -45,6 +45,7 @@
         cart.find(".shipping").text(json.shipping);
         cart.find(".tax").text(json.tax);
         cart.find(".total").text(json.total);
+        cart.find(".clean_total").text(json.clean_total);
         return button.prop("disabled", false);
       });
     });
@@ -64,6 +65,7 @@
         cart.find(".shipping").text(json.shipping);
         cart.find(".tax").text(json.tax);
         cart.find(".total").text(json.total);
+        cart.find(".clean_total").text(json.clean_total);
         tr.find(".price").text(json.item_price);
         return button.prop("disabled", false);
       });

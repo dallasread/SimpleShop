@@ -33,26 +33,39 @@
 		</tbody>
 	</table>
 
-	<p>
-		Subtotal: <span class="subtotal"><?php echo $cart->subtotal; ?></span>
-	</p>
-	<p>
+	<table>
+		<tr>
+			<td>Subtotal</td>
+			<td class="subtotal"><?php echo $cart->subtotal; ?></td>
+		</tr>
 		<?php if ($settings->local) { ?>
-			<input type="checkbox" id="local" <?php if ($cart->local) { echo "checked='checked'"; }?>> <label for="local">Pick Up Locally</label><br>
+			<tr>
+				<td>
+					<label for="local">Pick Up Locally</label>
+				</td>
+				<td>
+					<input type="checkbox" id="local" <?php if ($cart->local) { echo "checked='checked'"; }?>>
+				</td>
+			</tr>
 		<?php } ?>
-		Shipping: <span class="shipping"><?php echo $cart->shipping; ?></span>
-	</p>
-	<p>
-		Tax: <span class="tax"><?php echo $cart->tax; ?></span>
-	</p>
-	<p>
-		Total: <span class="total"><?php echo $cart->total; ?></span>
-	</p>
+		<tr>
+			<td>Shipping</td>
+			<td class="shipping"><?php echo $cart->shipping; ?></td>
+		</tr>
+		<tr>
+			<td>Tax</td>
+			<td class="tax"><?php echo $cart->tax; ?></td>
+		</tr>
+		<tr>
+			<td>Total</td>
+			<td class="total"><?php echo $cart->total; ?></td>
+		</tr>
+	</table>
 
 	<form action="<?php echo get_permalink($settings->cart_page_id); ?>" method="post">
 		<input type="hidden" name="checkout" value="true">
 		<button type="submit">
-			Checkout ($<span class="total"><?php echo $cart->total; ?></span>)
+			Checkout ($<span class="clean_total"><?php echo $cart->clean_total; ?></span>)
 		</button>
 	</form>
 </div>
