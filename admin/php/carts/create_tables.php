@@ -13,6 +13,7 @@
 		$carts_sql = sprintf("CREATE TABLE %s (
 		  id mediumint(9) NOT NULL AUTO_INCREMENT,
 		  token VARCHAR(32) NOT NULL,
+			local BOOLEAN NOT NULL DEFAULT 0,
 		  created_at DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		  updated_at DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		  PRIMARY KEY  (token), UNIQUE (id)

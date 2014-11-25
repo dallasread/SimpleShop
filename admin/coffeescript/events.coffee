@@ -1,9 +1,10 @@
 @SimpleShop ||= {}
 
 SimpleShop.init = ->
-	SimpleShop.events()
-	SimpleShop.initVariants()
-	SimpleShop.initPricing()
+	if $(".post-type-product").length
+		SimpleShop.events()
+		SimpleShop.initVariants()
+		SimpleShop.initPricing()
 
 SimpleShop.events = ->
 	tables = $(".variants, .pricing")

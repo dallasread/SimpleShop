@@ -15,6 +15,7 @@ SimpleShop.serializeObject = (form) ->
 
 SimpleShop.events = ->
 	add_to_cart = $(".add_to_cart")
+	cart = $(".cart")
 	
 	add_to_cart.on "change", "input, select", ->
 		form = $(this).closest("form")
@@ -25,6 +26,39 @@ SimpleShop.events = ->
 		$.post SimpleShopAjax.ajaxurl, data, (response) ->
 			json = JSON.parse response
 			form.find(".price").text json.clean_price
+			button.prop "disabled", false
+	
+	cart.on "click", "#local", ->
+		button = cart.find("button[type='submit']")
+		button.prop "disabled", true
+		
+		$.post SimpleShopAjax.ajaxurl,
+			action: "pickup_locally"
+			local: $(this).is(":checked")
+		, (response) ->
+			json = JSON.parse response
+			cart.find(".subtotal").text json.subtotal
+			cart.find(".shipping").text json.shipping
+			cart.find(".tax").text json.tax
+			cart.find(".total").text json.total
+			button.prop "disabled", false
+	
+	cart.on "change", ".quantity", ->
+		tr = $(this).closest("tr")
+		button = cart.find("button[type='submit']")
+		button.prop "disabled", true
+		
+		$.post SimpleShopAjax.ajaxurl,
+			action: "change_quantity"
+			item_id: tr.attr("data-item-id")
+			quantity: $(this).val()
+		, (response) ->
+			json = JSON.parse response
+			cart.find(".subtotal").text json.subtotal
+			cart.find(".shipping").text json.shipping
+			cart.find(".tax").text json.tax
+			cart.find(".total").text json.total
+			tr.find(".price").text json.item_price
 			button.prop "disabled", false
 
 $(document).ready SimpleShop.events

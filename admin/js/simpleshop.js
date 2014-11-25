@@ -2,9 +2,11 @@
   this.SimpleShop || (this.SimpleShop = {});
 
   SimpleShop.init = function() {
-    SimpleShop.events();
-    SimpleShop.initVariants();
-    return SimpleShop.initPricing();
+    if ($(".post-type-product").length) {
+      SimpleShop.events();
+      SimpleShop.initVariants();
+      return SimpleShop.initPricing();
+    }
   };
 
   SimpleShop.events = function() {

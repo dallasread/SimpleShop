@@ -59,6 +59,10 @@ class SimpleShop {
 		add_action( 'wp_ajax_nopriv_remove_from_cart', array( $this, 'remove_from_cart' ) );
 		add_action( 'wp_ajax_calculate_product_price', array( $this, 'calculate_product_price' ) );
 		add_action( 'wp_ajax_nopriv_calculate_product_price', array( $this, 'calculate_product_price' ) );
+		add_action( 'wp_ajax_pickup_locally', array( $this, 'pickup_locally' ) );
+		add_action( 'wp_ajax_nopriv_pickup_locally', array( $this, 'pickup_locally' ) );
+		add_action( 'wp_ajax_change_quantity', array( $this, 'change_quantity' ) );
+		add_action( 'wp_ajax_nopriv_change_quantity', array( $this, 'change_quantity' ) );
 		
 		add_shortcode( 'add_to_cart', array($this, 'add_to_cart_shortcode') );
 		add_shortcode( 'product_variants', array($this, 'product_variants_shortcode') );
@@ -188,6 +192,14 @@ class SimpleShop {
 	
 	public static function remove_from_cart() {
 		return require 'admin/php/carts/remove_from_cart.php';
+	}
+	
+	public static function pickup_locally() {
+		return require 'admin/php/carts/pickup_locally.php';
+	}
+	
+	public static function change_quantity() {
+		return require 'admin/php/carts/change_quantity.php';
 	}
 }
 

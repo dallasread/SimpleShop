@@ -13,13 +13,20 @@
 		"use_js" => 0,
 		"max_shipping" => 50,
 		"cart_page_id" => "",
-		"stripe" => "",
+		"stripe_secret" => "",
+		"stripe_publishable" => ""
 	))));
 	
 ?>
 
 <div class="wrap">
 	<h2>SimpleShop</h2>
+	<?php if (!(isset($_SERVER['HTTPS']) &&
+    ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+    $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https')) { ?>
+		<p style="color: maroon; "><strong>We strongly recommend that you install an SSL certificate before accepting any payments. Contact your hosting provider for more information.</strong></p>
+	<?php } ?>
 	<hr>
 	
 	<?php if (isset($saved)) { ?>
@@ -38,13 +45,13 @@
 						<p class="description">If the customer selects Local Pickup, there are no shipping costs and their address will not required.</p>
 					</td>
 				</tr>
-				<tr>
+				<!-- <tr>
 					<th><label for="use_js">Use Javascript</label></th>
 					<td>
 						<input name="use_js" type="checkbox" id="use_js" value="1" <?php if ($settings->use_js) { echo "checked='checked'"; } ?>>
 						<p class="description">With Javascript, customers will see a smooth notification when they add something to their cart. Without Javascript, customers will be redirected to their Cart.</p>
 					</td>
-				</tr>
+				</tr> -->
 				<tr>
 					<th><label for="max_shipping">Max Shipping Amount</label></th>
 					<td>
@@ -65,10 +72,17 @@
 					</td>
 				</tr>
 				<tr>
-					<th><label for="stripe">Stripe API Key</label></th>
+					<th><label for="stripe_secret">Stripe Secret Key</label></th>
 					<td>
-						<input name="stripe" type="text" id="stripe" value="<?php echo $settings->stripe; ?>" class="regular-text">
-						<p class="description">In a few words, explain what this site is about.</p>
+						<input name="stripe_secret" type="text" id="stripe_secret" value="<?php echo $settings->stripe_secret; ?>" class="regular-text">
+						<p class="description">You'll find this in the Account Settings section of your Stripe account.</p>
+					</td>
+				</tr>
+				<tr>
+					<th><label for="stripe_publishable">Stripe Publishable Key</label></th>
+					<td>
+						<input name="stripe_publishable" type="text" id="stripe_publishable" value="<?php echo $settings->stripe_publishable; ?>" class="regular-text">
+						<p class="description">You'll find this in the Account Settings section of your Stripe account.</p>
 					</td>
 				</tr>
 			</tbody>
