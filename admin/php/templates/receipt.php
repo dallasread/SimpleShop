@@ -1,32 +1,96 @@
 <?php $settings = json_decode( get_option( "simpleshop_settings" ) ); ob_start(); ?>
 <style type="text/css" media="screen">
+	body {
+		background: #eee;
+		font-family: Helvetica Neue, Helvetica, Arial, Sans serif;
+	}
+	
+	.receipt {
+		background: #fff;
+		box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+		padding: 20px;		
+	}
+	
+	.container {
+		max-width: 450px;
+		margin: 0 auto;
+	}
+	
+	.message {
+		color: #333;
+		text-align: center;
+		margin: 30px auto;
+		font-size: 15px;
+		line-height: 23px;
+	}
+	
 	table {
 		border-collapse: collapse;
 	}
 
 	td, th {
-		border: 1px solid #333;
 		padding: 7px;
+		border-bottom: 1px solid #ddd;
+		text-align: left;
+	}
+	
+	tr:last-child td {
+		border-bottom: 0 none;
+	}
+	
+	th {
+		font-size: 11px;
+		line-height: 11px;
+		text-transform: uppercase;
+		background: #ddd;
+	}
+	
+	td {
+		font-size: 13px;
+		line-height: 18px;
+	}
+	
+	tr.total_row td, .title {
+		font-size: 16px;
+		line-height: 22px;
+		font-weight: bold;
 	}
 	
 	td ul {
-		margin: 7px 0 0 -25px;
+		margin: 0px 0 0 -20px;
 	}
 	
 	.simpleshop_swatch {
 		display: inline-block;
 	}
 </style>
-<div class="cart">
+<p class="message container">
+	<strong>We've received your order and are processing it now!</strong><br><br>
+	Here's your receipt:
+</p>
+
+<div class="receipt container">
 	<table style="width: 100%; ">
-		<thead>
-			<tr>
-				<th>Quantity</th>
-				<th>Description</th>
-				<th>Amount</th>
-			</tr>
-		</thead>
 		<tbody>
+			<tr>
+				<td colspan="2">
+					<span class="title"><?php wp_title(); ?></span><br><br>
+					<?php echo $cart->customer_name; ?><br>
+					<?php echo $cart->customer_email; ?><br><br>
+					<?php echo $cart->address; ?><br>
+					<?php echo $cart->city; ?>, <?php echo $cart->province; ?><br>
+					<?php echo $cart->country; ?>, <?php echo $cart->postal_code; ?>
+					<br><br>
+				</td>
+				<td style="vertical-align: top; text-align: right; ">
+					<?php echo explode(" ", $cart->created_at)[0]; ?>
+				</td>
+			</tr>
+			<tr>
+				<th style="width: 20%; ">Quantity</th>
+				<th style="width: 50%; ">Description</th>
+				<th style="width: 30%; text-align: right; ">Amount</th>
+			</tr>
 			<?php if (!empty($cart->items)) { ?>
 				<?php foreach ($cart->items as $item) { ?>
 					<tr data-item-id="<?php echo $item->id; ?>">
@@ -38,7 +102,7 @@
 									<li>
 										<?php echo ucfirst($key); ?>: 
 										<?php if (strpos($key, 'color') !== false || strpos($key, 'colour') !== false) { ?>
-											<?php echo SimpleShop::build_swatch( $value ); ?>
+											<?php echo SimpleShop::build_swatch( $value, false, false, 25 ); ?>
 										<?php } else { ?>
 											<strong><?php echo ucfirst($value); ?></strong>
 										<?php } ?>
@@ -46,10 +110,14 @@
 								<?php } ?>
 							</ul>
 						</td>
-						<td style="text-align: right; " class="price"><?php echo $item->price; ?></td>
+						<td style="text-align: right; " class="price">$<?php echo $item->price; ?></td>
 					</tr>
 				<?php	} ?>
 			<?php } ?>
+			
+		<tr>
+			<td colspan="3" style="background: #ddd; height: 4px; padding: 0px; "></td>
+		</tr>
 		
 		<?php if ($cart->instructions != "") { ?>
 			<tr>
@@ -59,32 +127,33 @@
 				</td>
 			</tr>
 		<?php } ?>
-
-		<tr>
-			<td colspan="2">Subtotal</td>
-			<td style="text-align: right; " class="subtotal"><?php echo $cart->subtotal; ?></td>
-		</tr>
+		
 		<?php if ($cart->local) { ?>
 			<tr>
 				<td colspan="2">
 					<label for="local">Pick Up Locally</label>
 				</td>
 				<td style="text-align: right; ">
-					Yes
+					&check;
 				</td>
 			</tr>
 		<?php } ?>
+
+		<tr>
+			<td colspan="2">Subtotal</td>
+			<td style="text-align: right; " class="subtotal">$<?php echo $cart->subtotal; ?></td>
+		</tr>
 		<tr>
 			<td colspan="2">Shipping</td>
-			<td style="text-align: right; " class="shipping"><?php echo $cart->shipping; ?></td>
+			<td style="text-align: right; " class="shipping">$<?php echo $cart->shipping; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Tax</td>
-			<td style="text-align: right; " class="tax"><?php echo $cart->tax; ?></td>
+			<td style="text-align: right; " class="tax">$<?php echo $cart->tax; ?></td>
 		</tr>
-		<tr>
+		<tr class="total_row">
 			<td colspan="2">Total</td>
-			<td style="text-align: right; " class="total"><?php echo $cart->total; ?></td>
+			<td style="text-align: right; " class="total">$<?php echo $cart->total; ?></td>
 		</tr>
 	</table>
 </div>
