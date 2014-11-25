@@ -79,11 +79,32 @@
 		</div>
 		<div class="field">
 			<label for="exp-month">Expiry Month<label>
-			<input type="text" id="exp-month" data-stripe="exp-month">
+			<select id="exp-month" data-stripe="exp-month">
+				<?php foreach (array(
+						"01 - January",
+						"02 - February",
+						"03 - March",
+						"04 - April",
+						"05 - May",
+						"06 - June",
+						"07 - July",
+						"08 - August",
+						"09 - September",
+						"10 - October",
+						"11 - November",
+						"12 - December",
+					) as $month) { ?>
+					<option value="<?php echo explode(" - ", $month)[0]; ?>"><?php echo $month; ?></option>
+				<?php } ?>
+			</select>
 		</div>
 		<div class="field">
 			<label for="exp-year">Expiry Year<label>
-			<input type="text" id="exp-year" data-stripe="exp-year">
+			<select id="exp-year" data-stripe="exp-year">
+				<?php foreach (array(2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028) as $year) { ?>
+					<option><?php echo $year; ?></option>
+				<?php } ?>
+			</select>
 		</div>
 	</div>
 
