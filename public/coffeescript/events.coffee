@@ -21,6 +21,7 @@ SimpleShop.events = ->
 		button = form.find("button[type='submit']")
 		button.prop "disabled", true
 		data = SimpleShop.serializeObject form
+		data.action = "calculate_product_price"
 		$.post SimpleShopAjax.ajaxurl, data, (response) ->
 			json = JSON.parse response
 			form.find(".price").text json.clean_price

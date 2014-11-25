@@ -18,3 +18,8 @@
   .post-type-product table td .dashicons-trash {
     font-size: 16px;
     color: #aaa; }
+
+.post-type-cart .inline {
+  display: none !important; }
+.post-type-cart .add-new-h2 {
+  display: none !important; }

@@ -22,6 +22,7 @@
       button = form.find("button[type='submit']");
       button.prop("disabled", true);
       data = SimpleShop.serializeObject(form);
+      data.action = "calculate_product_price";
       return $.post(SimpleShopAjax.ajaxurl, data, function(response) {
         var json;
         json = JSON.parse(response);

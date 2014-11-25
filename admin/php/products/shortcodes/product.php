@@ -1,5 +1,5 @@
 <?php if (isset($attrs["id"])) { ?>
-	<form action="<?php echo admin_url('admin-ajax.php'); ?>" class="add_to_cart">
+	<form action="<?php echo admin_url('admin-ajax.php'); ?>" method="post" class="add_to_cart">
 		<input type="hidden" name="action" value="add_to_cart">
 		<input type="hidden" name="id" value="<?php echo $attrs["id"]; ?>">
 		

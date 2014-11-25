@@ -8,19 +8,6 @@
 			<th><label for="shipping">Shipping</label></th>
 			<td><input id="shipping" name="shipping" value="<?php echo get_post_meta( $post->ID, "shipping", true ); ?>" class="is_decimal"></td>
 		</tr>
-		<tr>
-			<th>
-				<label for="local">
-					Offer Local Pickup<br>
-					<span class="description">
-						If the customer selects Local Pickup, there are no shipping costs and their address will not required.
-					</span>
-				</label>
-			</th>
-			<td>
-				<input type="checkbox" id="local" name="local" <?php if (get_post_meta( $post->ID, "local", true )) { echo "checked='checked'"; } ?>>
-			</td>
-		</tr>
 	</table>
 
 	<p>
