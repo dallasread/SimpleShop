@@ -3,12 +3,13 @@
 	$output = array( "errors" => array() );
 	$vars = $_REQUEST;
 	$settings = json_decode( get_option( 'simpleshop_settings' ) );
-	$required = array( "customer_name", "customer_email", "address", "city", "province", "country", "postal_code", "card_token" );
-
+	
 	unset($vars["checkout"]);
 	unset($vars["complete"]);
 		
 	$cart = SimpleShop::current_cart();
+	$required = array( "customer_name", "customer_email" );
+	if (!$cart->local) { $required = array("customer_name", "customer_email", "address", "city", "province", "country", "postal_code", "card_token"); }
 	$vars["updated_at"] = date("Y-m-d H:i:s", current_time("timestamp"));
 	$wpdb->update( SIMPLESHOP_CARTS, $vars, array( "id" => $cart->id ));
 	$cart_vars = (array) SimpleShop::current_cart();

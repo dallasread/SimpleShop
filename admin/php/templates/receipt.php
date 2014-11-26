@@ -77,10 +77,10 @@
 					<span class="title"><?php wp_title(); ?></span><br><br>
 					<?php echo $cart->customer_name; ?><br>
 					<?php echo $cart->customer_email; ?><br><br>
-					<?php echo $cart->address; ?><br>
-					<?php echo $cart->city; ?>, <?php echo $cart->province; ?><br>
-					<?php echo $cart->country; ?>, <?php echo $cart->postal_code; ?>
-					<br><br>
+					<?php if ($cart->local) { ?>
+						<?php echo SimpleShop::pretty_address( $cart ); ?>
+						<br><br>
+					<?php } ?>
 				</td>
 				<td style="vertical-align: top; text-align: right; ">
 					<?php echo explode(" ", $cart->created_at)[0]; ?>

@@ -62,6 +62,8 @@ class SimpleShop {
 		add_action( 'wp_ajax_nopriv_pickup_locally', array( $this, 'pickup_locally' ) );
 		add_action( 'wp_ajax_change_quantity', array( $this, 'change_quantity' ) );
 		add_action( 'wp_ajax_nopriv_change_quantity', array( $this, 'change_quantity' ) );
+		add_action( 'wp_ajax_mark_complete', array( $this, 'mark_complete' ) );
+		add_action( 'wp_ajax_nopriv_mark_complete', array( $this, 'mark_complete' ) );
 		
 		add_shortcode( 'add_to_cart', array($this, 'add_to_cart_shortcode') );
 		add_shortcode( 'product_variants', array($this, 'product_variants_shortcode') );
@@ -101,8 +103,38 @@ class SimpleShop {
 		require 'admin/php/settings/index.php';
 	}
 	
-	public static function carts() {
-		return array(1, 2);
+	public static function carts( $status = "processing", $count = false ) {
+		global $wpdb;
+		
+		$fields = "*";
+		if ($count) { $fields = "COUNT(*)"; }
+		
+		$query = sprintf(
+			"SELECT $fields FROM %s WHERE status = '%s' ORDER BY updated_at DESC",
+			SIMPLESHOP_CARTS,
+			$status
+		);
+
+		if ($count) {
+			$carts = $wpdb->get_var($query);
+		} else {
+			$carts = $wpdb->get_results($query);
+		}
+		
+		return $carts;
+	}
+	
+	public static function mark_complete() {
+		global $wpdb;
+		$wpdb->update( SIMPLESHOP_CARTS, array(
+			"updated_at" => date("Y-m-d H:i:s", current_time("timestamp")),
+			"status" => $_REQUEST["status"]
+		), array( "id" => $_REQUEST["cart_id"] ));
+		die("{}");
+	}
+	
+	public static function pretty_address( $cart ) {
+		return require 'admin/php/templates/pretty_address.php';
 	}
 	
 	public static function add_roles() {
@@ -152,7 +184,7 @@ class SimpleShop {
 			if (!isset($_COOKIE['simpleshop_cart']) || ($cart && $cart->status != "pending")) {
 				$token = md5(uniqid(mt_rand(), true));
 				$_COOKIE['simpleshop_cart'] = $token;
-				setcookie( 'simpleshop_cart', $token, time() + 3600, COOKIEPATH, COOKIE_DOMAIN );
+				setcookie( 'simpleshop_cart', $token, time() * 2, COOKIEPATH, COOKIE_DOMAIN );
 			}
 		}
 		
@@ -163,7 +195,7 @@ class SimpleShop {
 		return require 'admin/php/products/save_product.php';
 	}
 	
-	public static function price_for_cart() {
+	public static function price_for_cart( $cart ) {
 		return require 'admin/php/carts/price_for_cart.php';
 	}
 	
@@ -215,7 +247,7 @@ class SimpleShop {
 		return require 'admin/php/products/price_for_product.php';
 	}
 	
-	public static function current_cart() {
+	public static function current_cart( $cart = false ) {
 		return require 'admin/php/carts/current_cart.php';
 	}
 	

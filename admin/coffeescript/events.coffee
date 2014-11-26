@@ -2,11 +2,14 @@
 
 SimpleShop.init = ->
 	if $(".post-type-product").length
-		SimpleShop.events()
+		SimpleShop.products()
 		SimpleShop.initVariants()
 		SimpleShop.initPricing()
+	
+	if $(".carts").length
+		SimpleShop.carts()
 
-SimpleShop.events = ->
+SimpleShop.products = ->
 	tables = $(".variants, .pricing")
 	
 	tables.on "click", ".add", ->
@@ -30,5 +33,19 @@ SimpleShop.events = ->
 		if $(this).val().length
 			decimal = parseFloat $(this).val()
 			$(this).val decimal.toFixed(2)
+
+SimpleShop.carts = ->
+	carts = $(".carts")
+	
+	carts.on "click", ".mark_complete", ->
+		cart_id = $(this).closest("tr").attr("data-id")
+		$(this).prop "disabled", true
+		
+		$.post ajaxurl,
+			action: "mark_complete"
+			cart_id: cart_id
+			status: if $(this).is(":checked") then "complete" else "processing"
+		, (response) ->
+			carts.find(".cart[data-id='#{cart_id}']").fadeOut()
 
 $(document).ready SimpleShop.init

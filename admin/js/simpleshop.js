@@ -3,13 +3,16 @@
 
   SimpleShop.init = function() {
     if ($(".post-type-product").length) {
-      SimpleShop.events();
+      SimpleShop.products();
       SimpleShop.initVariants();
-      return SimpleShop.initPricing();
+      SimpleShop.initPricing();
+    }
+    if ($(".carts").length) {
+      return SimpleShop.carts();
     }
   };
 
-  SimpleShop.events = function() {
+  SimpleShop.products = function() {
     var tables;
     tables = $(".variants, .pricing");
     tables.on("click", ".add", function() {
@@ -37,6 +40,23 @@
         decimal = parseFloat($(this).val());
         return $(this).val(decimal.toFixed(2));
       }
+    });
+  };
+
+  SimpleShop.carts = function() {
+    var carts;
+    carts = $(".carts");
+    return carts.on("click", ".mark_complete", function() {
+      var cart_id;
+      cart_id = $(this).closest("tr").attr("data-id");
+      $(this).prop("disabled", true);
+      return $.post(ajaxurl, {
+        action: "mark_complete",
+        cart_id: cart_id,
+        status: $(this).is(":checked") ? "complete" : "processing"
+      }, function(response) {
+        return carts.find(".cart[data-id='" + cart_id + "']").fadeOut();
+      });
     });
   };
 

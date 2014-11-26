@@ -25,34 +25,37 @@
 		<label for="customer_email">Email</label>
 		<input type="text" name="customer_email" id="customer_email" value="<?php echo $cart->customer_email; ?>">
 	</div>
-
-	<hr>
 	
-	<div class="field">
-		<label for="full_address">Full Address</label>
-		<input type="text" id="full_address" name="full_address" value="<?php echo $cart->full_address; ?>" autocomplete="off">
-	</div>
+	<?php if (!$cart->local) { ?>
 
-	<div class="field">
-		<label for="address">Address</label>
-		<input type="text" id="address" name="address" value="<?php echo $cart->address; ?>">
-	</div>
-	<div class="field">
-		<label for="city">City</label>
-		<input type="text" id="city" name="city" value="<?php echo $cart->city; ?>">
-	</div>
-	<div class="field">
-		<label for="province">Province/State</label>
-		<input type="text" id="province" name="province" value="<?php echo $cart->province; ?>">
-	</div>
-	<div class="field">
-		<label for="country">Country</label>
-		<input type="text" id="country" name="country" value="<?php echo $cart->country; ?>">
-	</div>
-	<div class="field">
-		<label for="postal_code">Postal/Zip Code</label>
-		<input type="text" id="postal_code" name="postal_code" value="<?php echo $cart->postal_code; ?>">
-	</div>
+		<hr>
+	
+		<div class="field">
+			<label for="full_address">Full Address</label>
+			<input type="text" id="full_address" name="full_address" value="<?php echo $cart->full_address; ?>" autocomplete="off">
+		</div>
+
+		<div class="field">
+			<label for="address">Address</label>
+			<input type="text" id="address" name="address" value="<?php echo $cart->address; ?>">
+		</div>
+		<div class="field">
+			<label for="city">City</label>
+			<input type="text" id="city" name="city" value="<?php echo $cart->city; ?>">
+		</div>
+		<div class="field">
+			<label for="province">Province/State</label>
+			<input type="text" id="province" name="province" value="<?php echo $cart->province; ?>">
+		</div>
+		<div class="field">
+			<label for="country">Country</label>
+			<input type="text" id="country" name="country" value="<?php echo $cart->country; ?>">
+		</div>
+		<div class="field">
+			<label for="postal_code">Postal/Zip Code</label>
+			<input type="text" id="postal_code" name="postal_code" value="<?php echo $cart->postal_code; ?>">
+		</div>
+	<?php } ?>
 
 	<hr>
 

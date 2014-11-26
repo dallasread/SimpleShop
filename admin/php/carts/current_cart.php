@@ -2,9 +2,14 @@
 	global $wpdb;
 	$now = date("Y-m-d H:i:s", current_time("timestamp"));
 	$settings = json_decode( get_option( "simpleshop_settings" ) );
-	$cart = false;
 	
-	if (isset($_COOKIE['simpleshop_cart'])) {
+	if (isset($cart) && is_object($cart) && property_exists($cart, "token")) {
+		$cart = $wpdb->get_row(sprintf(
+			"SELECT * FROM %s WHERE token = '%s'", 
+			SIMPLESHOP_CARTS,
+			$cart->token
+		));
+	} else if (isset($_COOKIE['simpleshop_cart'])) {
 		$cart = $wpdb->get_row(sprintf(
 			"SELECT * FROM %s WHERE token = '%s'", 
 			SIMPLESHOP_CARTS,
@@ -26,7 +31,7 @@
 		}
 	}
 	
-	if ($cart) {
+	if (isset($cart)) {
 		$cart->items_count = 0;
 		$cart->subtotal = 0;
 		$cart->tax = 0;
