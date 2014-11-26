@@ -20,7 +20,7 @@
 					</td>
 					<td>
 						<input type="text" name="variants[][options]" class="variants_selectize options" placeholder="red,blue">
-						<textarea name="variants[][description]" class="description" placeholder="Description of variant (optional)"></textarea>
+						<textarea name="variants[][description]" class="description" placeholder="Description (optional)"></textarea>
 					</td>
 					<td class="center no_padding">
 						<a href="#" class="remove">

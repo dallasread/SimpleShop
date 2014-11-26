@@ -30,6 +30,16 @@
 		line-height: 23px;
 	}
 	
+	.message.last_message a {
+		color: #777;
+	}
+	
+	.message.last_message {
+		margin-top: 30px;
+		font-size: 13px;
+		line-height: 21px;
+	}
+	
 	.refunded {
 		color: red;
 		padding: 10px;
@@ -97,7 +107,7 @@
 		<tbody>
 			<tr>
 				<td colspan="2">
-					<span class="title"><?php wp_title(); ?></span><br><br>
+					<span class="title"><?php bloginfo( "name" ); ?></span><br><br>
 					<?php echo $cart->customer_name; ?><br>
 					<?php echo $cart->customer_email; ?><br><br>
 					<?php if (!$cart->local) { ?>
@@ -180,4 +190,8 @@
 		</tr>
 	</table>
 </div>
+
+<p class="last_message message container">
+	<a href="<?php echo site_url("?simpleshop_receipt_preview={$cart->token}"); ?>">Click here to review this receipt online.</a>
+</p>
 <?php $return = ob_get_contents(); ob_end_clean(); return $return; ?> 
