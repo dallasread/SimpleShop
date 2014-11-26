@@ -39,7 +39,7 @@
 		'has_archive' => false,
 		'hierarchical' => false,
 		'menu_position' => null,
-		'supports' => array( 'title', 'thumbnail', 'excerpt', 'comments' ) //'editor',
+		'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments' )
 	);
 
 	register_post_type( 'product', $products );

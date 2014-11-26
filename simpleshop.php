@@ -276,7 +276,7 @@ class SimpleShop {
 		return require 'public/php/carts/change_quantity.php';
 	}
 	
-	public static function build_swatch( $colours, $selected = false, $id = false, $size = 32 ) {
+	public static function build_swatch( $colours, $selected = false, $id = false, $size = 28 ) {
 		require 'public/php/products/build_swatch.php';
 	}
 	

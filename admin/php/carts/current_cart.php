@@ -68,9 +68,9 @@
 		$cart->shipping = number_format($cart->shipping, 2);
 		$cart->subtotal = number_format($cart->subtotal, 2);
 		$cart->tax = number_format($cart->tax, 2);
-		$subtotal = (integer) str_replace(",", "", $cart->subtotal);
-		$tax = (integer) str_replace(",", "", $cart->tax);
-		$shipping = (integer) str_replace(",", "", $cart->shipping);
+		$subtotal = (float) str_replace(",", "", $cart->subtotal);
+		$tax = (float) str_replace(",", "", $cart->tax);
+		$shipping = (float) str_replace(",", "", $cart->shipping);
 		$cart->total = number_format($subtotal + $tax + $shipping, 2);
 		$cart->clean_total = str_replace(".00", "", $cart->total);
 	}

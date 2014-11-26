@@ -37,7 +37,7 @@
 		border-radius: 7px;
 		text-transform: uppercase;
 		right: 20px;
-		top: 70px;
+		top: 50px;
 	}
 	
 	table {
@@ -86,7 +86,9 @@
 </p>
 
 <div class="receipt container">
-	<h1 class="refunded">Refunded</h1>
+	<?php if ($cart->refund_token != "") { ?>
+		<h1 class="refunded">Refunded</h1>
+	<?php } ?>
 	<table style="width: 100%; ">
 		<tbody>
 			<tr>
@@ -94,7 +96,7 @@
 					<span class="title"><?php wp_title(); ?></span><br><br>
 					<?php echo $cart->customer_name; ?><br>
 					<?php echo $cart->customer_email; ?><br><br>
-					<?php if ($cart->local) { ?>
+					<?php if (!$cart->local) { ?>
 						<?php echo SimpleShop::pretty_address( $cart ); ?>
 						<br><br>
 					<?php } ?>
@@ -119,7 +121,7 @@
 									<li>
 										<?php echo ucfirst($key); ?>: 
 										<?php if (strpos($key, 'color') !== false || strpos($key, 'colour') !== false) { ?>
-											<?php echo SimpleShop::build_swatch( $value, false, false, 25 ); ?>
+											<?php echo SimpleShop::build_swatch( $value, false, false, 18 ); ?>
 										<?php } else { ?>
 											<strong><?php echo ucfirst($value); ?></strong>
 										<?php } ?>

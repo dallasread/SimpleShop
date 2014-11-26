@@ -66,7 +66,7 @@ SimpleShop.events = ->
 	$(document).on "click", ".simpleshop_swatch", ->
 		colour = $(this).attr("data-colour")
 		id = $(this).attr("data-id")
-		$(".simpleshop_swatch.selected").removeClass "selected"
+		$(this).closest(".field").find(".simpleshop_swatch.selected").removeClass "selected"
 		$(this).addClass "selected"
 		$("##{id}").val(colour).trigger "change"
 		false
