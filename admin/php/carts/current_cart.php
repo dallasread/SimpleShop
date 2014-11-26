@@ -31,7 +31,7 @@
 		}
 	}
 	
-	if (isset($cart)) {
+	if (isset($cart) && $cart) {
 		$cart->items_count = 0;
 		$cart->subtotal = 0;
 		$cart->tax = 0;

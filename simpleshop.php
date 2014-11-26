@@ -62,8 +62,9 @@ class SimpleShop {
 		add_action( 'wp_ajax_nopriv_pickup_locally', array( $this, 'pickup_locally' ) );
 		add_action( 'wp_ajax_change_quantity', array( $this, 'change_quantity' ) );
 		add_action( 'wp_ajax_nopriv_change_quantity', array( $this, 'change_quantity' ) );
+		
 		add_action( 'wp_ajax_mark_complete', array( $this, 'mark_complete' ) );
-		add_action( 'wp_ajax_nopriv_mark_complete', array( $this, 'mark_complete' ) );
+		add_action( 'wp_ajax_refund', array( $this, 'refund' ) );
 		
 		add_shortcode( 'add_to_cart', array($this, 'add_to_cart_shortcode') );
 		add_shortcode( 'product_variants', array($this, 'product_variants_shortcode') );
@@ -179,12 +180,19 @@ class SimpleShop {
 	
 	public static function init_plugin() {
 		if (!is_admin()) {
-			$cart = SimpleShop::current_cart();
+			if (isset($_GET["simpleshop_receipt_preview"])) {
+				$cart = SimpleShop::current_cart( (object) array(
+					"token" => $_GET["simpleshop_receipt_preview"]
+				));
+				die(require 'admin/php/templates/receipt.php');
+			} else {
+				$cart = SimpleShop::current_cart();
 
-			if (!isset($_COOKIE['simpleshop_cart']) || ($cart && $cart->status != "pending")) {
-				$token = md5(uniqid(mt_rand(), true));
-				$_COOKIE['simpleshop_cart'] = $token;
-				setcookie( 'simpleshop_cart', $token, time() * 2, COOKIEPATH, COOKIE_DOMAIN );
+				if (!isset($_COOKIE['simpleshop_cart']) || ($cart && $cart->status != "pending")) {
+					$token = md5(uniqid(mt_rand(), true));
+					$_COOKIE['simpleshop_cart'] = $token;
+					setcookie( 'simpleshop_cart', $token, time() * 2, COOKIEPATH, COOKIE_DOMAIN );
+				}
 			}
 		}
 		
@@ -274,6 +282,10 @@ class SimpleShop {
 	
 	public static function receipt( $cart ) {
 		return require 'admin/php/templates/receipt.php';
+	}
+	
+	public static function refund() {
+		return require 'admin/php/carts/refund.php';
 	}
 }
 

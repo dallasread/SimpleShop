@@ -26,6 +26,8 @@
 			card_token VARCHAR(100),
 			customer_token VARCHAR(100),
 			invoice_token VARCHAR(100),
+			refund_token VARCHAR(100),
+			charge_token VARCHAR(100),
 			instructions TEXT,
 			last_four VARCHAR(4),
 		  created_at DATETIME DEFAULT '0000-00-00 00:00:00' NOT NULL,

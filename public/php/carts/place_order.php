@@ -62,7 +62,7 @@
 					"customer" => $customer->id
 				));
 				
-				$invoice->pay();
+				$charge = $invoice->pay();
 			}
 			
 			$headers = array();
@@ -73,7 +73,8 @@
 			$wpdb->update( SIMPLESHOP_CARTS, array(
 				"status" => "processing", 
 				"customer_token" => $customer->id,
-				"invoice_token" => isset($invoice) ? $invoice->id : ""
+				"invoice_token" => isset($invoice) ? $invoice->id : "",
+				"charge_token" => isset($charge) ? $charge->charge : ""
 			), array( "id" => $cart->id ));
 		} catch(Exception $e) {
 			$wpdb->update( SIMPLESHOP_CARTS, array( "card_token" => NULL ), array( "id" => $cart->id ));

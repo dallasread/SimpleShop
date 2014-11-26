@@ -46,7 +46,7 @@
   SimpleShop.carts = function() {
     var carts;
     carts = $(".carts");
-    return carts.on("click", ".mark_complete", function() {
+    carts.on("click", ".mark_complete", function() {
       var cart_id;
       cart_id = $(this).closest("tr").attr("data-id");
       $(this).prop("disabled", true);
@@ -56,6 +56,21 @@
         status: $(this).is(":checked") ? "complete" : "processing"
       }, function(response) {
         return carts.find(".cart[data-id='" + cart_id + "']").fadeOut();
+      });
+    });
+    return carts.on("click", ".refund", function() {
+      var token;
+      token = $(this).closest("tr").attr("data-token");
+      return $.post(ajaxurl, {
+        action: "refund",
+        cart_token: token
+      }, function(response) {
+        var json;
+        json = JSON.parse(response);
+        if (json.refunded_at !== "") {
+          alert("Refund has been issued.");
+          return carts.find(".cart[data-token='" + token + "']").find(".trash").hide();
+        }
       });
     });
   };

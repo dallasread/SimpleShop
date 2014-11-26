@@ -3,12 +3,14 @@
 	body {
 		background: #eee;
 		font-family: Helvetica Neue, Helvetica, Arial, Sans serif;
+		margin: 40px 0 60px;
 	}
 	
 	.receipt {
 		background: #fff;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
 		padding: 20px;		
+		position: relative;
 	}
 	
 	.container {
@@ -19,9 +21,23 @@
 	.message {
 		color: #333;
 		text-align: center;
-		margin: 30px auto;
+		margin: 0px auto 30px;
 		font-size: 15px;
 		line-height: 23px;
+	}
+	
+	.refunded {
+		color: red;
+		padding: 10px;
+		border: 7px solid red;
+		font-weight: bold;
+		font-size: 32px;
+		line-height: 32px;
+		position: absolute;
+		border-radius: 7px;
+		text-transform: uppercase;
+		right: 20px;
+		top: 70px;
 	}
 	
 	table {
@@ -70,6 +86,7 @@
 </p>
 
 <div class="receipt container">
+	<h1 class="refunded">Refunded</h1>
 	<table style="width: 100%; ">
 		<tbody>
 			<tr>

@@ -47,5 +47,16 @@ SimpleShop.carts = ->
 			status: if $(this).is(":checked") then "complete" else "processing"
 		, (response) ->
 			carts.find(".cart[data-id='#{cart_id}']").fadeOut()
+	
+	carts.on "click", ".refund", ->
+		token = $(this).closest("tr").attr("data-token")
+		$.post ajaxurl,
+			action: "refund"
+			cart_token: token
+		, (response) ->
+			json = JSON.parse response
+			if json.refunded_at != ""
+				alert "Refund has been issued."
+				carts.find(".cart[data-token='#{token}']").find(".trash").hide()
 
 $(document).ready SimpleShop.init
