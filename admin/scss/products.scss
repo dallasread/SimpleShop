@@ -11,9 +11,13 @@
 		padding: 0px;
 	}
 	
-	.description {
+	span.description {
 		font-weight: normal;
 		color: #aaa;
+	}
+	
+	textarea.description {
+		width: 100%;
 	}
 	
 	.bigger {
@@ -23,6 +27,12 @@
 	}
 	
 	table {
+		.variant, .tier {
+			td {
+				border-bottom: 1px solid #ddd;
+			}
+		}
+
 		input {
 			max-width: 100%;
 		}

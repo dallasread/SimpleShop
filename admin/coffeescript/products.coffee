@@ -3,16 +3,18 @@
 SimpleShop.variantSelects = []
 
 SimpleShop.initPricing = ->
-	pricing = JSON.parse $(".pricing").attr("data-pricing")
-	
-	for tier in pricing
-		SimpleShop.addPricingTier tier
+	pricing = $(".pricing").attr("data-pricing")
+	if pricing.length
+		pricing = JSON.parse pricing
+		for tier in pricing
+			SimpleShop.addPricingTier tier
 
 SimpleShop.initVariants = ->
-	variants = JSON.parse $(".variants").attr("data-variants")
-	
-	for variant in variants
-		SimpleShop.addVariant variant
+	variants = $(".variants").attr("data-variants")
+	if variants.length
+		variants = JSON.parse variants
+		for variant in variants
+			SimpleShop.addVariant variant
 
 SimpleShop.setSelectize = (obj) ->
 	type = if obj.closest(".pricing").length then "pricing" else "variants"
@@ -87,7 +89,7 @@ SimpleShop.addPricingTier = (data = {}) ->
 
 SimpleShop.addVariant = (data = {}) ->
 	[item, tbody] = SimpleShop.getTemplate $(".variants")
-	
+
 	for k,v of data
 		if k == "options"
 			item.find(".#{k}").val v.join(",")

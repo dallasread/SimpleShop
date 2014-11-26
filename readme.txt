@@ -5,7 +5,7 @@ Contributors: dallas22ca
 Author: Dallas Read
 Author URI: http://www.DallasRead.com
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NX9NZCDNRD3CC
-Tags: ecommerce, sell, sale, coupon, shop, store
+Tags: e-commerce, wp-e-commerce, shop, cart, paypal, authorize, stock control, ecommerce, shipping, tax, sell, sale, coupon, store
 Requires at least: 3.6
 Tested up to: 4.0.1
 Stable tag: trunk

@@ -14,9 +14,13 @@
 			<?php $variants = json_decode( get_post_meta( $attrs["id"], "variants", true, json_encode(array()) ) ); ?>
 			<?php foreach ($variants as $key => $value) { ?>
 				<?php $id = "product_{$attrs["id"]}_{$value->permalink}"; ?>
+				<?php if (isset($_GET[$value->permalink])) { $attrs[$value->permalink] = $_GET[$value->permalink]; } ?>
 			
 				<div class="field">
-					<label for="<?php echo $id; ?>"><?php echo $value->attribute; ?></label>
+					<label for="<?php echo $id; ?>">
+						<?php echo $value->attribute; ?>
+						<span class="hint"><?php echo $value->description; ?></span>
+					</label>
 					
 					<?php if (strpos($value->permalink, 'color') !== false || strpos($value->permalink, 'colour') !== false) { ?>
 						<?php foreach ($value->options as $option) { ?>
@@ -37,7 +41,9 @@
 			
 			<div class="field">
 				<label for="quantity">Quantity</label>
-				<input type="text" name="quantity" id="quantity" value="<?php if (isset($attrs["quantity"])) { echo $attrs["quantity"]; } else { echo 1; } ?>">
+				<?php if (!isset($attrs["quantity"])) { $attrs["quantity"] = 1; } ?>
+				<?php if (isset($_GET["quantity"])) { $attrs["quantity"] = $_GET["quantity"]; } ?>
+				<input type="text" name="quantity" id="quantity" value="<?php echo $attrs["quantity"]; ?>">
 			</div>
 		
 		<?php } ?>

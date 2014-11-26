@@ -89,24 +89,30 @@
 
   SimpleShop.initPricing = function() {
     var pricing, tier, _i, _len, _results;
-    pricing = JSON.parse($(".pricing").attr("data-pricing"));
-    _results = [];
-    for (_i = 0, _len = pricing.length; _i < _len; _i++) {
-      tier = pricing[_i];
-      _results.push(SimpleShop.addPricingTier(tier));
+    pricing = $(".pricing").attr("data-pricing");
+    if (pricing.length) {
+      pricing = JSON.parse(pricing);
+      _results = [];
+      for (_i = 0, _len = pricing.length; _i < _len; _i++) {
+        tier = pricing[_i];
+        _results.push(SimpleShop.addPricingTier(tier));
+      }
+      return _results;
     }
-    return _results;
   };
 
   SimpleShop.initVariants = function() {
     var variant, variants, _i, _len, _results;
-    variants = JSON.parse($(".variants").attr("data-variants"));
-    _results = [];
-    for (_i = 0, _len = variants.length; _i < _len; _i++) {
-      variant = variants[_i];
-      _results.push(SimpleShop.addVariant(variant));
+    variants = $(".variants").attr("data-variants");
+    if (variants.length) {
+      variants = JSON.parse(variants);
+      _results = [];
+      for (_i = 0, _len = variants.length; _i < _len; _i++) {
+        variant = variants[_i];
+        _results.push(SimpleShop.addVariant(variant));
+      }
+      return _results;
     }
-    return _results;
   };
 
   SimpleShop.setSelectize = function(obj) {

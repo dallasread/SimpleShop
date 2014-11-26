@@ -6,6 +6,10 @@
 		margin: 40px 0 60px;
 	}
 	
+	.simpleshop_swatch {
+		display: block !important;
+	}
+	
 	.receipt {
 		background: #fff;
 		box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);

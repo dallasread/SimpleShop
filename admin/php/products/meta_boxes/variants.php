@@ -1,6 +1,6 @@
 <div class="variants" data-variants="<?php echo htmlspecialchars( get_post_meta( $post->ID, "variants", true) ); ?>">
 	<p>Variants allow you to offer different sizes, colours, and more.</p>
-	<table class="wp-list-table widefat fixed">
+	<table class="variants wp-list-table widefat fixed">
 		<thead>
 			<tr class="alternate">
 				<th style="width: 15%; ">Attribute</th>
@@ -20,6 +20,7 @@
 					</td>
 					<td>
 						<input type="text" name="variants[][options]" class="variants_selectize options" placeholder="red,blue">
+						<textarea name="variants[][description]" class="description" placeholder="Description of variant (optional)"></textarea>
 					</td>
 					<td class="center no_padding">
 						<a href="#" class="remove">
