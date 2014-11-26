@@ -148,7 +148,7 @@
       var colour, id;
       colour = $(this).attr("data-colour");
       id = $(this).attr("data-id");
-      $(".simpleshop_swatch.selected").removeClass("selected");
+      $(this).closest(".field").find(".simpleshop_swatch.selected").removeClass("selected");
       $(this).addClass("selected");
       $("#" + id).val(colour).trigger("change");
       return false;

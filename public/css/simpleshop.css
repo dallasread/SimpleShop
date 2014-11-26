@@ -20,12 +20,6 @@
   display: inline-block;
   padding: 1px;
   border: 2px solid transparent; }
-  .simpleshop_swatch.simpleshop_swatch_count_1 .inner_swatch {
-    width: 32px;
-    height: 32px; }
-  .simpleshop_swatch.simpleshop_swatch_count_2 .outer_swatch {
-    width: 32px;
-    height: 32px; }
   .simpleshop_swatch.simpleshop_swatch_count_2 .inner_swatch {
     width: 0;
     height: 0;

@@ -80,7 +80,7 @@
   this.SimpleShop || (this.SimpleShop = {});
 
   SimpleShop.parameterize = function(str) {
-    return str.trim().replace(/[^a-zA-Z0-9-\s]/g, '').replace(/[^a-zA-Z0-9-]/g, '-').toLowerCase();
+    return str.trim().replace(/[^a-zA-Z0-9-\s]/g, '').replace(/[^a-zA-Z0-9-]/g, '_').toLowerCase();
   };
 
   this.SimpleShop || (this.SimpleShop = {});
