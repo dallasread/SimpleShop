@@ -78,7 +78,7 @@
 					<th><label for="email">Email Orders</label></th>
 					<td>
 						<input name="email" type="text" id="email" value="<?php echo $settings->email; ?>" class="regular-text">
-						<p class="description">Which address should we email receipts to?</p>
+						<p class="description">Which email address should we send order notifications to?</p>
 					</td>
 				</tr>
 				<tr>

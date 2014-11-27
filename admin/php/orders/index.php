@@ -21,7 +21,7 @@
 				<th style="width: 7%; ">Done</th>
 				<th style="width: 15%; ">Name</th>
 				<th style="width: 20%; ">Email</th>
-				<th style="width: 22%; ">Address</th>
+				<th style="width: 22%; ">Shipping Address</th>
 				<th style="width: 7%; text-align: center; ">Local</th>
 				<th style="width: 8%; text-align: right; ">Total</th>				
 				<th style="width: 13%; ">Updated At</th>

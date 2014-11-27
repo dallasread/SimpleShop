@@ -15,9 +15,13 @@ SimpleShop is a lightweight e-commerce plugin that integrates seamlessly with St
 
 == Description ==
 
-**Do I have to use Stripe with SimpleShop?**
+SimpleShop is a lightweight e-commerce plugin that integrates seamlessly with Stripe.
 
-Yes, SimpleShop was designed around Stripe's API. Of course, we may extend this functionality in the future.
+* Add products with variations (size, colour, etc)
+* Beautiful receipts and payment notifications
+* Refund payments quickly and easily
+* Easy to integrate with shortcodes
+* Accept payments without redirecting customers away from your website
 
 **How do I use SimpleShop?**
 
@@ -25,6 +29,10 @@ Yes, SimpleShop was designed around Stripe's API. Of course, we may extend this 
 * We strongly recommend installing an SSL certificate.
 * Visit the Products page (in the left sidebar) and start adding products and variations.
 * Create a page called Cart and place the [cart] shortcode in the page content.
+
+**Do I have to use Stripe with SimpleShop?**
+
+Yes, SimpleShop was designed around Stripe's API. Of course, we may extend this functionality in the future.
 
 == Installation ==
 
@@ -44,7 +52,8 @@ SimpleShop is a lightweight e-commerce plugin that integrates seamlessly with St
 
 == Screenshots ==
 
-1. The SimpleShop meta box.
+1. How your product appears (with some custom styles).
+2. Easily set pricing for variation combinations.
 
 == Upgrade Notice ==
 

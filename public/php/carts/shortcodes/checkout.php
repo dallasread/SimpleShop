@@ -31,12 +31,12 @@
 		<hr>
 	
 		<div class="field">
-			<label for="full_address">Full Address</label>
+			<label for="full_address">Shipping Address</label>
 			<input type="text" id="full_address" name="full_address" value="<?php echo $cart->full_address; ?>" autocomplete="off">
 		</div>
 
 		<div class="field">
-			<label for="address">Address</label>
+			<label for="address">Street Number &amp; Street</label>
 			<input type="text" id="address" name="address" value="<?php echo $cart->address; ?>">
 		</div>
 		<div class="field">
