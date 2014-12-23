@@ -50,6 +50,18 @@ Yes, SimpleShop was designed around Stripe's API. Of course, we may extend this 
 = What is SimpleShop? =
 SimpleShop is a lightweight e-commerce plugin that integrates seamlessly with Stripe.
 
+= What's Next? =
+* Your email, shipping address
+* Snapshot of items including price
+* Color changer for MYB
+* Local pickup place
+* Rename products post type
+* Reorder pricing
+* Reorder variants
+* Out of stock
+* Caching support
+* Double payment
+
 == Screenshots ==
 
 1. How your product appears (with some custom styles).
